@@ -1,0 +1,32 @@
+{
+  "name": "kinto-react-bootstrap",
+  "version": "0.0.1",
+  "description": "A kinto+react project boilerplate.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kinto/kinto-react-boilerplate.git"
+  },
+  "keywords": [
+    "kinto",
+    "react",
+    "boilerplate"
+  ],
+  "author": "Nicolas Perriault <nperriault@mozilla.com>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Kinto/kinto-react-boilerplate/issues"
+  },
+  "homepage": "https://github.com/Kinto/kinto-react-boilerplate#readme",
+  "devDependencies": {
+    "babel": "^5.8.19",
+    "browserify": "^11.0.0",
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "react": "^0.13.3",
+    "sinon": "^1.15.4"
+  }
+}
