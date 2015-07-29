@@ -1,10 +1,11 @@
 {
   "name": "kinto-react-bootstrap",
   "version": "0.0.1",
-  "description": "A kinto+react project boilerplate.",
+  "description": "A Kinto+React project boilerplate.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node server.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,11 +23,14 @@
   },
   "homepage": "https://github.com/Kinto/kinto-react-boilerplate#readme",
   "devDependencies": {
-    "babel": "^5.8.19",
-    "browserify": "^11.0.0",
+    "babel-core": "^5.8.19",
+    "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
     "react": "^0.13.3",
-    "sinon": "^1.15.4"
+    "react-hot-loader": "^1.2.8",
+    "sinon": "^1.15.4",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
   }
 }
