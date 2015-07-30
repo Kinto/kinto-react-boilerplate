@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha"
+    "test": "node_modules/.bin/karma start"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,13 @@
     "babel-core": "^5.8.19",
     "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
+    "karma": "^0.12.36",
+    "karma-chai": "^0.1.0",
+    "karma-cli": "^0.1.0",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.2.0",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-webpack": "^1.6.0",
     "mocha": "^2.2.5",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.8",
