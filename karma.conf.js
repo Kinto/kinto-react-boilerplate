@@ -19,7 +19,7 @@ module.exports = function (config) {
     },
     reporters: ["dots"],
     webpack: {
-      devtool: "inline-source-map",
+      devtool: ["eval", "inline-source-map"],
       module: {
         loaders: [
           {
