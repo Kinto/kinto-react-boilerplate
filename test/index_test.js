@@ -27,6 +27,7 @@ describe("App", () => {
     var rendered;
 
     beforeEach(() => {
+      sandbox.stub(store, 'load').returns(Promise.resolve({}));
       rendered = TestUtils.renderIntoDocument(<App store={store}/>);
     });
 
@@ -42,6 +43,10 @@ describe("App", () => {
       sinon.assert.calledWithExactly(store.collection.create, {label: "Hello, world"});
     });
 
+    it("loads items from store on mount", () => {
+      sinon.assert.calledOnce(store.load);
+    });
+
     it("renders items of store when store changes", () => {
       store.emit("change", {items: [{id: "id", label: ":)"}]});
       let node = React.findDOMNode(rendered);
@@ -50,22 +55,23 @@ describe("App", () => {
   });
 
   describe("Store", () => {
-    it("adds Kinto created record to its state", (done) => {
-      sandbox.stub(store.collection, 'create').returns(Promise.resolve({data: {label: "Hola!"}}));
-      store.create({})
-        .then(_ => {
-          expect(store.state.items).to.eql([{label: "Hola!"}]);
-          done();
-        });
-    });
 
-    it("emits change on create", (done) => {
-      sandbox.stub(store.collection, 'create').returns(Promise.resolve({data: {}}));
+    it("load() fills items and emits change", (done) => {
+      sandbox.stub(store.collection, 'list').returns(Promise.resolve({data: [{}]}));
       store.on('change', event => {
-        expect(event).to.eql({items: [{}]});
+        expect(store.state.items).to.eql([{}]);
         done();
       });
-      store.create();
+      store.load();
+    });
+
+    it("create() adds Kinto record to its state and emits change", (done) => {
+      sandbox.stub(store.collection, 'create').returns(Promise.resolve({data: {label: "Hola!"}}));
+      store.on('change', event => {
+        expect(event).to.eql({items: [{label: "Hola!"}]});
+        done();
+      });
+      store.create({});
     });
   });
 });
