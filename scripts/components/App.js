@@ -44,14 +44,14 @@ export class Store extends EventEmitter {
   constructor(kinto) {
     super();
     this.state = {items: []};
-    this.db = kinto.collection("items");
+    this.collection = kinto.collection("items");
   }
 
   create(record) {
-    return this.db.create(record)
-      .then((res) => {
-        this.state.items.concat(res.data);
-        this.emit('change', {data: this.state});
+    return this.collection.create(record)
+      .then(res => {
+        this.state.items.push(res.data);
+        this.emit('change', this.state);
       })
       .catch(console.error.bind(console));
   }
@@ -74,7 +74,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Form updateRecord={this.updateRecord.bind(this)}/>
-        <List items={this.state.items}/>
+        <List items={this.state.items.map(item => item.label)}/>
       </div>
     );
   }
