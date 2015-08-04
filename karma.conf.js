@@ -2,11 +2,12 @@ module.exports = function (config) {
   config.set({
     browsers: ["Firefox"],
     singleRun: true,
-    frameworks: ["chai", "mocha"],
+    frameworks: ["chai", "mocha", "sinon"],
     plugins: [
       "karma-firefox-launcher",
       "karma-chai",
       "karma-mocha",
+      "karma-sinon",
       "karma-sourcemap-loader",
       "karma-webpack",
     ],
@@ -17,7 +18,6 @@ module.exports = function (config) {
       "tests.webpack.js": ["webpack", "sourcemap"]
     },
     reporters: ["dots"],
-    singleRun: true,
     webpack: {
       devtool: "inline-source-map",
       module: {
