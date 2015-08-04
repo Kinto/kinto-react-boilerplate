@@ -2,6 +2,8 @@ import React from "react";
 import TestUtils from "react/lib/ReactTestUtils";
 import { expect } from "chai";
 import sinon from "sinon";
+import Kinto from "kinto";
+
 import App, { Store, Form, List } from "../scripts/components/App";
 
 
@@ -12,7 +14,8 @@ describe("App", () => {
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    store = new Store();
+    const kinto = new Kinto();
+    store = new Store(kinto);
   });
 
   afterEach(() => {
@@ -34,35 +37,35 @@ describe("App", () => {
       // TestUtils.Simulate.change(node, {target: {value: 'Hello, world'}});
       node.value = "Hello, world";
       const form = React.findDOMNode(rendered).querySelector("form");
-      sandbox.stub(store.db, 'create').returns(Promise.resolve({}));
+      sandbox.stub(store.collection, 'create').returns(Promise.resolve({}));
       TestUtils.Simulate.submit(form);
-      sinon.assert.calledWithExactly(store.db.create, {label: "Hello, world"});
+      sinon.assert.calledWithExactly(store.collection.create, {label: "Hello, world"});
     });
 
     it("renders items of store when store changes", () => {
-      store.emit("change", {items: [{label: ":)"}]});
+      store.emit("change", {items: [{id: "id", label: ":)"}]});
       let node = React.findDOMNode(rendered);
-      expect(node.querySelectorAll("li")).to.have.length.of(1);
+      expect(node.querySelector("li").textContent).to.eql(":)");
     });
   });
 
   describe("Store", () => {
-    it("adds Kinto created record to its state", () => {
-      sandbox.stub(store.db, 'create').returns(Promise.resolve({label: "Hola!"}));
+    it("adds Kinto created record to its state", (done) => {
+      sandbox.stub(store.collection, 'create').returns(Promise.resolve({data: {label: "Hola!"}}));
       store.create({})
         .then(_ => {
           expect(store.state.items).to.eql([{label: "Hola!"}]);
+          done();
         });
     });
 
-    it("emits change on create", () => {
-      sandbox.stub(store.db, 'create').returns(Promise.resolve({}));
-      let callback = sinon.spy();
-      store.on('change', callback);
-      store.create()
-        .then(_ => {
-          sinon.assert.called(callback);
-        });
+    it("emits change on create", (done) => {
+      sandbox.stub(store.collection, 'create').returns(Promise.resolve({data: {}}));
+      store.on('change', event => {
+        expect(event).to.eql({items: [{}]});
+        done();
+      });
+      store.create();
     });
   });
 });
