@@ -2,6 +2,8 @@ import React from "react";
 import TestUtils from "react/lib/ReactTestUtils";
 import { expect } from "chai";
 import sinon from "sinon";
+import Kinto from "kinto";
+
 import App, { Store, Form, List } from "../scripts/components/App";
 
 
@@ -12,7 +14,8 @@ describe("App", () => {
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    store = new Store();
+    let kinto = new Kinto();
+    store = new Store(kinto);
   });
 
   afterEach(() => {

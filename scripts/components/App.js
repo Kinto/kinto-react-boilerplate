@@ -1,11 +1,6 @@
 import { EventEmitter } from "events";
 import React from "react";
 
-import Kinto from "kinto";
-
-
-const SERVER_URL = "https://kinto.dev.mozaws.net/v1";
-
 
 export class List extends React.Component {
 
@@ -46,11 +41,9 @@ export class Form extends React.Component {
 
 export class Store extends EventEmitter {
 
-  constructor() {
+  constructor(kinto) {
     super();
     this.state = {items: []};
-
-    const kinto = new Kinto({remote: SERVER_URL});
     this.db = kinto.collection("items");
   }
 
