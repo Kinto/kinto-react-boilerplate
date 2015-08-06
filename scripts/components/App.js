@@ -47,6 +47,14 @@ export class Store extends EventEmitter {
     this.collection = kinto.collection("items");
   }
 
+  load() {
+    return this.collection.list()
+      .then(res => {
+        this.state.items = res.data;
+        this.emit('change', this.state);
+      });
+  }
+
   create(record) {
     return this.collection.create(record)
       .then(res => {
@@ -64,6 +72,7 @@ export default class App extends React.Component {
     super(props);
     this.state = this.props.store.state;
     this.props.store.on('change', this.setState.bind(this));
+    this.props.store.load();
   }
 
   updateRecord(record) {
