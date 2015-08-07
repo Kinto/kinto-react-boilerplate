@@ -1,7 +1,8 @@
 import "babel/polyfill";
 import btoa from "btoa";
 import React from "react";
-import App, {Store} from "./components/App";
+import App from "./components/App";
+import { Store } from "./store";
 import Kinto from "kinto";
 
 const server = "https://kinto.dev.mozaws.net/v1";
