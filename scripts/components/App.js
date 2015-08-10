@@ -47,21 +47,35 @@ export class Store extends EventEmitter {
     this.collection = kinto.collection("items");
   }
 
+  onError(error) {
+    this.emit("error", error);
+  }
+
   load() {
     return this.collection.list()
       .then(res => {
         this.state.items = res.data;
-        this.emit('change', this.state);
-      });
+        this.emit("change", this.state);
+      })
+      .catch(this.onError.bind(this));
   }
 
   create(record) {
     return this.collection.create(record)
       .then(res => {
         this.state.items.push(res.data);
-        this.emit('change', this.state);
+        this.emit("change", this.state);
       })
-      .catch(console.error.bind(console));
+      .catch(this.onError.bind(this));
+  }
+
+  sync() {
+    return this.collection.sync()
+      .then(res => {
+        this.state.items = this.state.items.concat(res.created);
+        this.emit("change", this.state);
+      })
+      .catch(this.onError.bind(this));
   }
 }
 
@@ -71,7 +85,12 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.props.store.state;
-    this.props.store.on('change', this.setState.bind(this));
+    this.props.store.on("change", state => {
+      this.setState(Object.assign({busy: false}, state));
+    });
+    this.props.store.on("error", error => {
+      this.setState({busy: false, error: error.message});
+    });
     this.props.store.load();
   }
 
@@ -79,11 +98,19 @@ export default class App extends React.Component {
     this.props.store.create(record);
   }
 
+  syncRecords() {
+    this.setState({busy: true, error: ""});
+    this.props.store.sync();
+  }
+
   render() {
+    var disabled = this.state.busy ? "disabled" : "";
     return (
-      <div>
+      <div className={disabled}>
         <Form updateRecord={this.updateRecord.bind(this)}/>
         <List items={this.state.items.map(item => item.label)}/>
+        <button onClick={this.syncRecords.bind(this)} disabled={disabled}>Sync!</button>
+        <div className="error">{this.state.error}</div>
       </div>
     );
   }

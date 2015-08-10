@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Kinto/kinto-react-boilerplate#readme",
   "dependencies": {
+    "btoa": "^1.1.2",
     "react": "^0.13.3"
   },
   "devDependencies": {
