@@ -2,24 +2,6 @@ import { EventEmitter } from "events";
 import React from "react";
 
 
-export class List extends React.Component {
-
-  static get defaultProps() {
-    return {items: []};
-  }
-
-  render() {
-    return (
-      <ul>{
-        this.props.items.map((label, i) => {
-          return <li key={i}>{label}</li>;
-        })
-      }</ul>
-    );
-  }
-}
-
-
 export class Form extends React.Component {
 
   onFormSubmit(event) {
@@ -34,6 +16,24 @@ export class Form extends React.Component {
         <input name="label" type="text" />
         <button type="submit">Add</button>
       </form>
+    );
+  }
+}
+
+
+export class List extends React.Component {
+
+  static get defaultProps() {
+    return {items: []};
+  }
+
+  render() {
+    return (
+      <ul>{
+        this.props.items.map((label, i) => {
+          return <li key={i}>{label}</li>;
+        })
+      }</ul>
     );
   }
 }
