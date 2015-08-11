@@ -33,9 +33,16 @@ export class Store extends EventEmitter {
 
   sync() {
     return this.collection.sync()
-      .then(res => {
-        this.state.items = this.state.items.concat(res.created);
-        this.emit("change", this.state);
+      .then((res) => {
+        if (res.ok) {
+          return this.load();
+        }
+
+        // If conflicts, take remote version and sync again (recursively).
+        return Promise.all(res.conflicts.map(conflict => {
+          return this.collection.resolve(conflict, conflict.remote);
+        }))
+        .then(_ => this.sync());
       })
       .catch(this.onError.bind(this));
   }
