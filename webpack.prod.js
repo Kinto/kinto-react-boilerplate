@@ -16,11 +16,12 @@ module.exports = {
     new webpack.IgnorePlugin(/fake\-indexeddb/)  // From kinto.js
   ],
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".js", ".jsx", ".less"]
   },
   module: {
     loaders: [
       { test: /\.jsx?$/, loaders: ["babel"], include: path.join(__dirname, "scripts") },
+      { test: /\.less$/, loader: "style!css!less" }
     ]
   }
 };

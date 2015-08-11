@@ -33,11 +33,15 @@
     "babel": "^5.8.20",
     "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
+    "css-loader": "^0.15.6",
     "gh-pages": "^0.4.0",
     "jsdom": "^6.5.1",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
     "mocha": "^2.2.5",
     "react-hot-loader": "^1.2.8",
     "sinon": "git://github.com/uberVU/Sinon.JS.git#0aaf834c9f",
+    "style-loader": "^0.12.3",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"
   }

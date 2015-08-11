@@ -1,3 +1,11 @@
+/*
+ * Webpack inclusions.
+ */
+require("../styles/style.less");
+
+/*
+ * Application.
+ */
 import "babel/polyfill";
 import btoa from "btoa";
 import React from "react";

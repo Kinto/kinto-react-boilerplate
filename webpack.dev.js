@@ -6,7 +6,7 @@ module.exports = {
   entry: [
     "webpack-dev-server/client?http://localhost:3000",
     "webpack/hot/only-dev-server",
-    "./scripts/index"
+    "./scripts/index.js"
   ],
   output: {
     path: path.join(__dirname, "scripts"),
@@ -18,13 +18,17 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".js", ".jsx", ".less"]
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       loaders: ["react-hot", "babel"],
       include: path.join(__dirname, "scripts"),
+    },
+    {
+      test: /\.less$/,
+      loader: 'style!css!less'
     }]
   }
 };
