@@ -59,12 +59,29 @@ describe("Store", () => {
 
     beforeEach(() => {
       sandbox.stub(store.collection, "sync")
-        .returns(Promise.resolve({created: [{label: "from server"}]}));
+        .returns(Promise.resolve({ok: true}));
+      sandbox.stub(store.collection, "list")
+        .returns(Promise.resolve({data: [{label: "from db"}]}));
     });
 
-    it("adds Kinto created records to its state and emits change", (done) => {
+    it("reloads the local db after sync if ok", (done) => {
       store.on("change", event => {
-        expect(event).to.eql({items: [{label: "Hola!"}, {label: "from server"}]});
+        expect(event).to.eql({items: [{label: "from db"}]});
+        done();
+      });
+      store.sync();
+    });
+
+    it("resolves conflicts using remote records", (done) => {
+      const conflict = {remote: {id: 1, label: "remote"}};
+
+      store.collection.sync
+        .onFirstCall().returns(Promise.resolve({ok: false, conflicts: [conflict]}))
+        .onSecondCall().returns(Promise.resolve({ok: true}));
+      sandbox.stub(store.collection, "resolve").returns(Promise.resolve({}));
+
+      store.on("change", event => {
+        sinon.assert.calledWithExactly(store.collection.resolve, conflict, conflict.remote);
         done();
       });
       store.sync();
