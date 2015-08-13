@@ -49,7 +49,10 @@ export default class App extends React.Component {
     this.props.store.on("error", error => {
       this.setState({busy: false, error: error.message});
     });
-    this.props.store.load();
+
+    if (this.props.user.authenticated) {
+      this.props.store.load();
+    }
   }
 
   updateRecord(record) {
@@ -62,7 +65,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (!this.props.user.token) {
+    if (!this.props.user.authenticated) {
       return (
         <a href={this.props.user.loginURI}>Sign in</a>
       );

@@ -30,8 +30,8 @@ describe("App", () => {
     beforeEach(() => {
       sandbox.stub(store, "load").returns(Promise.resolve({}));
       sandbox.stub(store, "sync").returns(Promise.resolve({}));
-      
-      const fakeUser = {token: "abc"};
+
+      const fakeUser = {authenticated: true};
       rendered = TestUtils.renderIntoDocument(<App store={store} user={fakeUser}/>);
     });
 

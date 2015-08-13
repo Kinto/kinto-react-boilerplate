@@ -12,14 +12,19 @@ const headers = {};
 
 const login = server.replace("v1", "v0/fxa-oauth/login?redirect=")
 const redirect = encodeURIComponent(window.location.href.replace(/#.*/, '') + '#');
-const user = {token: "", loginURI: login + redirect};
+const user = {authenticated: false, loginURI: login + redirect};
 
 // Receive token after redirection from OAuth server.
-const fxaToken = window.location.hash.slice(1);
+// Or recover it from previous sessions.
+var fxaToken =  window.location.hash.slice(1) || sessionStorage.getItem("bearer-token");
 if (fxaToken) {
-  window.location.hash = "";  // Hide it from navbar.
+  // Hide it from navbar.
+  window.location.hash = "";
+  // Save it for this session.
+  window.sessionStorage.setItem("bearer-token", fxaToken);
+  // Use it as authentication header.
   headers.Authorization = "Bearer " + fxaToken;
-  user.token = fxaToken;
+  user.authenticated = true;
 }
 
 const kinto = new Kinto({remote: server, headers: headers});
