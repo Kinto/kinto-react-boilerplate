@@ -41,7 +41,7 @@ export class List extends React.Component {
 class SyncButton extends React.Component {
   render() {
     const user = this.props.user;
-    if (user && user.uid) {
+    if (user && user.token) {
       return (
         <button onClick={this.props.onSync} disabled={this.props.disabled}>Sync!</button>
       );
