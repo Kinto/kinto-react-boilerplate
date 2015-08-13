@@ -38,6 +38,19 @@ export class List extends React.Component {
 }
 
 
+class SyncButton extends React.Component {
+  render() {
+    const user = this.props.user;
+    if (user && user.uid) {
+      return (
+        <button onClick={this.props.onSync} disabled={this.props.disabled}>Sync!</button>
+      );
+    }
+    return <a href={user.loginURI}>Sign in</a>;
+  }
+}
+
+
 export default class App extends React.Component {
 
   constructor(props) {
@@ -67,7 +80,7 @@ export default class App extends React.Component {
       <div className={disabled}>
         <Form updateRecord={this.updateRecord.bind(this)}/>
         <List items={this.state.items.map(item => item.label)}/>
-        <button onClick={this.syncRecords.bind(this)} disabled={disabled}>Sync!</button>
+        <SyncButton user={this.props.user} onSync={this.syncRecords.bind(this)} disabled={disabled}/>
         <div className="error">{this.state.error}</div>
       </div>
     );
