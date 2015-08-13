@@ -30,7 +30,9 @@ describe("App", () => {
     beforeEach(() => {
       sandbox.stub(store, "load").returns(Promise.resolve({}));
       sandbox.stub(store, "sync").returns(Promise.resolve({}));
-      rendered = TestUtils.renderIntoDocument(<App store={store}/>);
+      
+      const fakeUser = {token: "abc"};
+      rendered = TestUtils.renderIntoDocument(<App store={store} user={fakeUser}/>);
     });
 
     it("adds item to the store on form submit", () => {
