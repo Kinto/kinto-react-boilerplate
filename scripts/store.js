@@ -16,6 +16,10 @@ export class Store extends EventEmitter {
   load() {
     return this.collection.list()
       .then(res => {
+        // If no record in local database, sync!
+        if (res.data.length === 0)
+          return this.sync();
+
         this.state.items = res.data;
         this.emit("change", this.state);
       })
