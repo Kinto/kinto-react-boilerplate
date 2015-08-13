@@ -3,10 +3,10 @@ import { EventEmitter } from "events";
 
 export class Store extends EventEmitter {
 
-  constructor(kinto) {
+  constructor(kinto, collection) {
     super();
     this.state = {items: []};
-    this.collection = kinto.collection("items");
+    this.collection = kinto.collection(collection);
   }
 
   onError(error) {

@@ -16,7 +16,7 @@ describe("App", () => {
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     const kinto = new Kinto();
-    store = new Store(kinto);
+    store = new Store(kinto, "items");
   });
 
   afterEach(() => {

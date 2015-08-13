@@ -13,9 +13,9 @@ describe("Store", () => {
   beforeEach((done) => {
     sandbox = sinon.sandbox.create();
     const kinto = new Kinto();
-    store = new Store(kinto);
+    store = new Store(kinto, "items");
 
-    sandbox.stub(store.collection, 'create')
+    sandbox.stub(store.collection, "create")
       .returns(Promise.resolve({data: {label: "Hola!"}}));
     store.create({})
       .then(done);
@@ -25,6 +25,12 @@ describe("Store", () => {
     sandbox.restore();
   });
 
+  it("uses the specified collection name", () => {
+    store.on("change", event => {
+      const store = new Store(kinto, "articles");
+      expect(store.collection.name).to.equal("articles");
+    });
+  });
 
   describe("#load()", () => {
 
