@@ -51,7 +51,7 @@ export default class App extends React.Component {
     });
 
     if (this.props.user.authenticated) {
-      this.props.store.load();
+      this.props.store.sync();
     }
   }
 
