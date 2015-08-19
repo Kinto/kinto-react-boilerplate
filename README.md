@@ -25,6 +25,7 @@ Start a new project and fetch the boilerplate:
     $ mkdir newproject && cd $_
     $ git init .
     $ git remote add boilerplate https://github.com/Kinto/kinto-react-boilerplate.git
+    $ git fetch boilerplate
     $ git merge boilerplate/master
 
 Install the environment and run:
