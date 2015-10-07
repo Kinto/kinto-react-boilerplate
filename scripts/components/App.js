@@ -5,7 +5,7 @@ export class Form extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    var record = {label: event.target.label.value};
+    var record = {label: event.target.elements.label.value};
     this.props.updateRecord(record);
   }
 

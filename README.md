@@ -7,7 +7,7 @@ A sample [Kinto](https://github.com/mozilla-services/kinto.js) & [React](http://
 The boilerplate helps you to develop Kinto JavaScript applications faster by making some decisions on your behalf. It includes:
 
 * [React + ES6](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html) classes using [Babel](https://babeljs.io);
-* Setup **test environment** using [Mocha](http://mochajs.org/)+[Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), and [Karma](karma-runner.github.io/) for React components;
+* Setup **test environment** using [Mocha](http://mochajs.org/)+[Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), and [jsdom](https://github.com/tmpvar/jsdom/) for React components;
 * Setup **build and packaging** using [webpack](http://webpack.github.io/);
 * Basic asynchronous store for collection records <sup>[1](#note-flux)</sup>;
 * Fully tested demo CRUD app with sync button.
