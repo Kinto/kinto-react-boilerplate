@@ -7,7 +7,6 @@ import Kinto from "kinto";
 import App, { Form, List } from "../../scripts/components/App";
 import { Store } from "../../scripts/store";
 
-
 describe("App", () => {
 
   var sandbox;
