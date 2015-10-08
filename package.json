@@ -4,7 +4,7 @@
   "description": "A Kinto+React project boilerplate.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node_modules/.bin/webpack-dev-server --config webpack.dev.js --hot --port=3000",
     "test": "node_modules/.bin/mocha --recursive --compilers js:babel/register --require ./test/setup-jsdom.js test/"
   },
   "repository": {
