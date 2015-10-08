@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --config webpack.dev.js --hot --port=3000",
+    "build": "NODE_ENV=production node_modules/.bin/webpack --optimize-minimize --config webpack.prod.js && cp index.html style.css build/",
+    "publish": "npm run build && node_modules/.bin/gh-pages --dist build/",
     "test": "node_modules/.bin/mocha --recursive --compilers js:babel/register --require ./test/setup-jsdom.js test/"
   },
   "repository": {
@@ -31,6 +33,7 @@
     "babel": "^5.8.20",
     "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
+    "gh-pages": "^0.4.0",
     "jsdom": "^6.5.1",
     "mocha": "^2.2.5",
     "react-hot-loader": "^1.2.8",

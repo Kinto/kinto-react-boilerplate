@@ -48,7 +48,17 @@ Run both unit and browser tests:
 
 ### Publish
 
-(*To be done*)
+In order to publish the application on [Github pages](https://pages.github.com/),
+you just need to run:
+
+    $ npm run publish
+
+After a few minutes, the application will be available at http://username.github.io/project/
+
+If you want to check the content of the `build/` folder before publishing, or
+host it somewhere else yourself, just run instead:
+
+    $ npm run build
 
 
 ### Get some more
