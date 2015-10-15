@@ -2,6 +2,9 @@
 
 A sample [Kinto](https://github.com/mozilla-services/kinto.js) & [React](http://facebook.github.io/react/) project boilerplate.
 
+[![Build Status](https://travis-ci.org/Kinto/kinto-react-boilerplate.svg)](https://travis-ci.org/Kinto/kinto-react-boilerplate)
+
+
 ## Scope
 
 The boilerplate helps you to develop Kinto JavaScript applications faster by making some decisions on your behalf. It includes:
@@ -39,11 +42,12 @@ With auto-refresh when code changes!
 
 ### Test
 
-Run both unit and browser tests:
+Run the tests suite with:
 
     $ npm test
 
-> A `travis.yml` file is provided to enable tests on TravisCI in one click!
+> * Node v4+ is required.
+> * A `travis.yml` file is provided to enable tests on TravisCI in one click!
 
 
 ### Publish
