@@ -5,3 +5,37 @@
 .error {
   color: red;
 }
+
+li > form {
+  display: inline-block;
+}
+
+li.updated, li.created {
+  color: blue;
+}
+
+.preferences {
+    margin: 10px;
+    padding: 10px;
+    border-left: solid 1px lightgray;
+}
+
+.preferences > input {
+    display: none;
+}
+
+.preferences form {
+    display: none;
+}
+
+.preferences input:checked ~ form {
+    display: block;
+}
+
+.preferences > input ~ label::after {
+    content: '  \25b8';
+}
+
+.preferences > input:checked ~ label::after {
+    content: '  \25be';
+}
