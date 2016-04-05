@@ -37,7 +37,7 @@
     "jsdom": "^6.5.1",
     "mocha": "^2.2.5",
     "react-hot-loader": "^1.2.8",
-    "sinon": "git://github.com/uberVU/Sinon.JS.git#0aaf834c9f",
+    "sinon": "^1.17.3",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"
   }
