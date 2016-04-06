@@ -27,7 +27,8 @@
   "dependencies": {
     "btoa": "^1.1.2",
     "kinto": "^1.2.2",
-    "react": "^0.14.3"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
